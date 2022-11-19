@@ -1,0 +1,83 @@
+@startuml
+skinparam dpi 300
+scale max 300 width
+component Customer {
+    artifact "Customer Details" as CustomerDetails <<artifact>>
+}
+component "Customer Management" as CustomerManagement {
+    component "Customer Register" as CustomerRegister
+    component "Customer Login" as CustomerLogin
+}
+component "E-Commerce Dashboard" as ECommerceDashboard {
+    component "Product Catalog" as ProductCatalog
+    component "Checkout" as Checkout
+    component Chat
+}
+component "Order Management" as OrderManagement {
+    artifact "Checked out Cart" as CheckedOutCart <<artifact>>
+    artifact "Order Details" as OrderDetails <<artifact>>
+    artifact "PaymentDetails" as PaymentDetails <<artifact>>
+}
+component Vendor {
+    artifact "Vendor Details" as VendorDetails <<artifact>>
+    component "Product Management" as ProductManagement {
+        artifact "Product Details" as ProductDetails <<artifact>>
+    }
+}
+component "Product Promotion Management" as ProductPromotionManagement {
+    artifact "Promotion Details" as PromotionDetails <<artifact>>
+}
+component "Product Inventory Management" as ProductInventoryManagement <<per product>> {
+    artifact "Inventory Details" as InventoryDetails <<artifact>>
+    artifact "Product Stock Details" as ProductStockDetails <<artifact>>
+}
+component "Vendor Management" as VendorManagement {
+    component "Vendor Register" as VendorRegister
+    component "Vendor Login" as VendorLogin
+    component "Vendor Verification" as VendorVerification
+}
+component "Review Management" as ReviewManagement {
+    artifact "Review Details" as ReviewDetails <<artifact>>
+}
+component "Transaction Management" as TransactionManagement {
+    artifact "Transaction Details" as TransactionDetails <<artifact>>
+    component "Payment Gateway" as PaymentGateway <<external provider>>
+}
+component "Marketplace Admin Dashboard" as MarketplaceAdminDashboard {
+    component "Vendor Management" {
+        component "Vendor Verification" {
+            artifact "Vendor Verification Details" as VendorVerificationDetails <<artifact>>
+        }
+    }
+}
+
+MarketplaceAdminDashboard -- VerificationProcess
+VerificationProcess )-- VendorVerification: checks verification status
+
+CustomerManagement -- CustomerAuthentication
+CustomerAuthentication )-- Customer
+
+Customer -- CustomerProfile
+CustomerProfile )-- ECommerceDashboard
+CustomerProfile )-- ReviewManagement: fetches customer profile
+
+Chat -- Vendor: Customer chats with vendor
+
+VendorManagement -- VendorAuthentication
+VendorAuthentication )-- Vendor
+
+Vendor -- VendorProfile
+VendorProfile )-- ProductPromotionManagement: fetches vendor profile
+
+Vendor -- SoldProductRecords
+SoldProductRecords )-- ProductInventoryManagement: fetches sales statistics
+
+ECommerceDashboard -- ProductListing
+ProductListing )-- ProductInventoryManagement
+ProductListing )-- ReviewManagement
+
+OrderManagement -- PaymentProcessing: initiates payment
+PaymentProcessing )-- TransactionManagement
+
+VendorManagement -- TransactionManagement: vendor gets paid
+@enduml

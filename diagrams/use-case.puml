@@ -1,0 +1,32 @@
+@startuml
+skinparam dpi 300
+scale max 300 width
+top to bottom direction
+skinparam packageStyle rectangle
+actor Customer
+actor Vendor
+actor Admin
+actor PaymentServiceProvider
+rectangle System {
+  Customer --> (Register as Customer)
+  Customer --> (Customer Login)
+  (Customer Login) ..> (View Listed Products) : <<include>>
+  (View Listed Products) ..> (Buy Products) : <<include>>
+  (Buy Products) ..> (Leave Rating and Review)  : <<extend>>
+  (Buy Products) ..> (Conduct Payment)  :<<include>>
+  (Buy Products) ..> (Chat)  :<<include>>
+
+  Vendor --> (Register as Vendor)
+  Vendor --> (Vendor Login)
+  (Vendor Login) ..> (List Products for Sale) : <<include>>
+  (Vendor Login) ..> (Chat) : <<include>>
+  (Register as Vendor) ..> (Vendor Verification) : <<include>>
+  (List Products for Sale) ..> (Promote Product) : <<include>>
+
+  Admin --> (Vendor Verification)
+  PaymentServiceProvider --> (Conduct Payment)
+  (Credit Card) -|> (Conduct Payment)
+  (Bank Transfer) -|> (Conduct Payment)
+  (PayPal) -|> (Conduct Payment)
+}
+@enduml
