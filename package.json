@@ -1,0 +1,13 @@
+{
+    "name": "notes",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "build": "node index.js"
+    },
+    "author": "Péter Ferenc Gyarmati",
+    "license": "MIT",
+    "dependencies": {
+        "@shd101wyy/mume": "^0.7.3"
+    }
+}
