@@ -1,6 +1,6 @@
 @startuml
 skinparam dpi 300
-scale max 300 width
+scale max 270 width
 top to bottom direction
 skinparam packageStyle rectangle
 actor Customer
