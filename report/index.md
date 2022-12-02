@@ -4,27 +4,29 @@
 
 # Cloud Architecture of an E-Commerce Platform
 
-<div class="p-4 bg-blue-100 shadow-md rounded-md italic text-center">Submission of Péter Ferenc Gyarmati - a11913446</div>
+<div class="p-4 bg-gray-100 shadow-md rounded-md italic text-center">Submission of Péter Ferenc Gyarmati - a11913446</div>
 
 ## Application Overview
 
-Selling products online is on the rise, however there is a significant entry-barrier for small and medium sized businesses to enter the market. The main reason for this is the high cost of setting up and maintaining an online store. This is where an e-commerce marketplace comes in. An e-commerce marketplace is a platform that allows vendors to list their products and buyers to purchase them. The marketplace takes a commission on each sale. This allows vendors to focus on their core business and buyers to have a wide variety of products to choose from while delegating the task of developing and maintaining the platform where the actual sales and logistics take place. The marketplace also provides a platform for vendors to advertise their products and buyers to find them and leave reviews. The information system I propose and design in this project aims to realise such an E-Commerce platform.
+Selling products online is on the rise, however there is a significant entry-barrier for small and medium sized businesses to enter the market. The main reason for this is the high cost of setting up and maintaining an online store. This is where an e-commerce marketplace comes in. An e-commerce marketplace is a platform that allows vendors to list their products and buyers to purchase them, taking a commission on each sale. This allows vendors to focus on their core business and buyers to have a wide variety of products to choose from while delegating the task of developing and maintaining the platform where the actual sales and logistics take place. The marketplace also provides a platform for vendors to advertise their products and buyers to find them and leave reviews. The information system I propose and design in this project aims to realise such an E-Commerce platform.
 
 ### Functional Requirements
 
 - Customers can register and login to the system
 - Vendors can register and list their products
 - Vendors can promote their products for a period of time
-- Customers can search for products and observe them in detail
+- Promoted products appear for users automatically based on their preferences and real-time interactions with the system
+- Customers can search for products and observe them in detail, with support for image recognition
 - Customers can buy products
 - Customers can choose from payment methods such as credit card, PayPal, and bank transfer
 - Customers can leave ratings and reviews for products
 - Customers can connect with vendors in built-in chat rooms
+- The system detects fraudulent activities and blocks the corresponding accounts
 
 ### Non-Functional Requirements
 
 - The system should be highly available across the globe
-- The system should have low latency to ensure a good user experience
+- The system should have extremely low latency to ensure a good user experience and the maximization of conversions
 - The system should be scalable to handle a large number of concurrent users
 - The system should tolerate spikes in traffic (e.g. before Holidays, Black Friday, etc.)
 - The system should be secure and protect customer and vendor data
@@ -164,8 +166,22 @@ The component diagram presented below shows the components of the system and how
 
 <div class="pagebreak"></div>
 
+## Role of Edge Computing and AI in the System
+
+Taking a look at the functional and non-functional requirements of the system, it is straightforward that the combined usage of cloud and edge deployment techniques is justified. A public cloud deployment is sensible for the system's core functionality to achieve high availability, scalability, fault tolerance, and elasticity.
+
+On the other hand, the usage of edge deployment to squeeze out the last millisecond of performance is justified by the nature of an e-commerce system and the behaviour of consumers: various studies - such as [the one conducted by Google and Deloitte jointly](https://www2.deloitte.com/ie/en/pages/consulting/articles/milliseconds-make-millions.html) - outline that _"milliseconds make millions"_, that is, the performance of an e-commerce system is crucial to maximize conversion rates and revenue. Furthermore, targeted advertisements and personalized recommendations also need to be supported by the system. This requires the collection and processing of users' data based on which massively personalized content can be delivered dynamically. Since this dynamic content can be influenced by users' location and how they interact with the frontend in real-time (what mouse or touch events they perform, how much time they spend on a given page segment, etc.) it is crucial to have this processing as close as possible to the users.
+
+Furthermore, for the system to support search with image recognition & object detection (so that users can search and browse products using images or descriptions) the use of AI is justified. What's more, for the fraudelent activity detection, the combined use of edge computing and AI is also reasonable, so that fraudulent activities such as fake accounts, fake reviews, or fraudulent transactions can be detected in real-time, helping to protect the system and its users from scams, and ensure the integrity and security of the platform.
+
 ## Applicable Cloud Patterns
+
+In what follows I idenitfy concrete cloud patterns and justify their usage in the system.
 
 ### Vendor Agnostic Cloud Patterns
 
 ### Vendor Specific Cloud Patterns
+
+## Google Cloud Platform Architecture
+
+## Modelling with OpenTosca
