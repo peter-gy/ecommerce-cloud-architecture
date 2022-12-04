@@ -4,7 +4,7 @@
 
 # Cloud Architecture of an E-Commerce Platform
 
-<div class="p-4 bg-gray-100 shadow-md rounded-md italic text-center">Submission of Péter Ferenc Gyarmati - a11913446</div>
+<div class="p-4 bg-gray-100 shadow-md rounded-md italic text-center">Submission of Péter Ferenc Gyarmati - <span class="font-bold">11913446</span></div>
 
 ## Application Overview
 
@@ -181,6 +181,12 @@ Taking a look at the functional and non-functional requirements of the system, i
 On the other hand, the usage of edge deployment to squeeze out the last millisecond of performance is justified by the nature of an e-commerce system and the behaviour of consumers: various studies - such as [the one conducted by Google and Deloitte jointly](https://www2.deloitte.com/ie/en/pages/consulting/articles/milliseconds-make-millions.html) - outline that _"milliseconds make millions"_, that is, the performance of an e-commerce system is crucial to maximize conversion rates and revenue. Furthermore, targeted advertisements and personalized recommendations also need to be supported by the system. This requires the collection and processing of users' data based on which massively personalized content can be delivered dynamically. Since this dynamic content can be influenced by users' location and how they interact with the frontend in real-time (what mouse or touch events they perform, how much time they spend on a given page segment, etc.) it is crucial to have this processing as close as possible to the users. Complying with local data privacy regulations is also a concern, which is another reason to have the data processing as close as possible to the users, without having to transfer the data to a far away, poetentially out-of-continent data center.
 
 Furthermore, for the system to support search with image recognition & object detection (so that users can search and browse products using images or descriptions) the use of AI is justified. What's more, for the fraudelent activity detection, the combined use of edge computing and AI is also reasonable, so that fraudulent activities such as fake accounts, fake reviews, or fraudulent transactions can be detected in real-time, helping to protect the system and its users from scams, and ensure the integrity and security of the platform.
+
+As the previous diagram illustrates, the _E-Commerce Dashboard_ components are all deployed to the end-user client devices. In the case of a _Customer_, the _Local Analytics_ AI component is also deployed onto the device, featuring federated learning. The platform collects browsing and purchasing data from its users and divides the data into multiple local datasets, one for each user. The system then trains a machine learning model using the local datasets. Because the data is kept private and secure, the model is trained in a decentralized way and does not have access to the raw data and finally it uses the trained model to make personalized recommendations to users based on their browsing and purchasing history. As users continue to browse and make purchases on the platform, their local datasets are updated and the model is retrained using federated learning to improve its accuracy and relevance.
+
+The _Order Management_ and _Transaction Management_ components are deployed to edge nodes to provide absolutely mimimal latency and to ensure that the system is highly available in all areas. Furthermore, a _Data Anonymization_ component is also deployed here out of privacy considerations and so that the system is complient with all local data protection laws and gets fully anonymized before being sent to the cloud.
+
+<div class="pagebreak"></div>
 
 ## Applicable Cloud Patterns
 
