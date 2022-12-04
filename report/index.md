@@ -166,11 +166,19 @@ The component diagram presented below shows the components of the system and how
 
 <div class="pagebreak"></div>
 
+### Deployment Overview
+
+The diagram below presents where the previously introduced components are planned to be deployed: locally on a client device, on an edge node or on a cloud node.
+
+@import "./diagrams/deployment.puml"
+
+<div class="pagebreak"></div>
+
 ## Role of Edge Computing and AI in the System
 
 Taking a look at the functional and non-functional requirements of the system, it is straightforward that the combined usage of cloud and edge deployment techniques is justified. A public cloud deployment is sensible for the system's core functionality to achieve high availability, scalability, fault tolerance, and elasticity.
 
-On the other hand, the usage of edge deployment to squeeze out the last millisecond of performance is justified by the nature of an e-commerce system and the behaviour of consumers: various studies - such as [the one conducted by Google and Deloitte jointly](https://www2.deloitte.com/ie/en/pages/consulting/articles/milliseconds-make-millions.html) - outline that _"milliseconds make millions"_, that is, the performance of an e-commerce system is crucial to maximize conversion rates and revenue. Furthermore, targeted advertisements and personalized recommendations also need to be supported by the system. This requires the collection and processing of users' data based on which massively personalized content can be delivered dynamically. Since this dynamic content can be influenced by users' location and how they interact with the frontend in real-time (what mouse or touch events they perform, how much time they spend on a given page segment, etc.) it is crucial to have this processing as close as possible to the users.
+On the other hand, the usage of edge deployment to squeeze out the last millisecond of performance is justified by the nature of an e-commerce system and the behaviour of consumers: various studies - such as [the one conducted by Google and Deloitte jointly](https://www2.deloitte.com/ie/en/pages/consulting/articles/milliseconds-make-millions.html) - outline that _"milliseconds make millions"_, that is, the performance of an e-commerce system is crucial to maximize conversion rates and revenue. Furthermore, targeted advertisements and personalized recommendations also need to be supported by the system. This requires the collection and processing of users' data based on which massively personalized content can be delivered dynamically. Since this dynamic content can be influenced by users' location and how they interact with the frontend in real-time (what mouse or touch events they perform, how much time they spend on a given page segment, etc.) it is crucial to have this processing as close as possible to the users. Complying with local data privacy regulations is also a concern, which is another reason to have the data processing as close as possible to the users, without having to transfer the data to a far away, poetentially out-of-continent data center.
 
 Furthermore, for the system to support search with image recognition & object detection (so that users can search and browse products using images or descriptions) the use of AI is justified. What's more, for the fraudelent activity detection, the combined use of edge computing and AI is also reasonable, so that fraudulent activities such as fake accounts, fake reviews, or fraudulent transactions can be detected in real-time, helping to protect the system and its users from scams, and ensure the integrity and security of the platform.
 

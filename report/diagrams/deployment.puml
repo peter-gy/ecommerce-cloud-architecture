@@ -1,0 +1,30 @@
+@startuml
+!theme plain
+skinparam dpi 300
+scale max 250 width
+left to right direction
+node "Customer Client" as CustomerClient  {
+    component "E-Commerce Dashboard" as ECommerceDashboard
+    component "Local Analytics" as LocalAnalytics
+}
+node "Vendor Client" as VendorClient  {
+    component "E-Commerce Vendor Dashboard" as ECommerceVendorDashboard
+}
+node "Marketplace Admin Client" as MarketplaceAdminClient  {
+    component "Marketplace Admin Dashboard" as MarketplaceAdminDashboard
+}
+cloud Cloud {
+    component "Vendor Management" as VendorManagement
+    component Vendor
+    component "Product Promotion Management" as ProductPromotionManagement
+    component "Product Inventory Management" as ProductInventoryManagement
+    component "Review Management" as ReviewManagement
+    component "Customer Management" as CustomerManagement
+    component Customer
+}
+cloud Edge {
+    component "Transaction Management" as TransactionManagement 
+    component "Order Management" as OrderManagement 
+    component "Data Anonymization" as DataAnonymization
+}
+@enduml

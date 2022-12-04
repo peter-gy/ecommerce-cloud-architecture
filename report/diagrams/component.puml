@@ -1,4 +1,5 @@
 @startuml
+!theme plain
 skinparam dpi 300
 scale max 270 width
 component Customer {
@@ -23,6 +24,10 @@ component Vendor {
     component "Product Management" as ProductManagement {
         artifact "Product Details" as ProductDetails <<artifact>>
     }
+}
+component "Data Analytics" as DataAnalytics {
+    component "Local Analytics" as LocalAnalytics
+    component "Data Anonymization" as DataAnonymization
 }
 component "Product Promotion Management" as ProductPromotionManagement {
     artifact "Promotion Details" as PromotionDetails <<artifact>>
@@ -75,6 +80,9 @@ SoldProductRecords )-- ProductInventoryManagement: fetches sales statistics
 ECommerceDashboard -- ProductListing
 ProductListing )-- ProductInventoryManagement
 ProductListing )-- ReviewManagement
+
+DataAnalytics -- ECommerceDashboard
+DataAnalytics -- ProductPromotionManagement
 
 OrderManagement -- PaymentProcessing: initiates payment
 PaymentProcessing )-- TransactionManagement
