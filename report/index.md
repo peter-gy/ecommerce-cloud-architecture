@@ -318,3 +318,48 @@ After having identified the patterns and artifacts that are required to build th
 <div class="pagebreak"></div>
 
 ## Modelling with <span class="inline capitalize">Open</span><span class="inline capitalize">Tosca</span>
+
+In order to keep the OpenTOSCA models as overviewable as possible, I created a separate topology for the components deployed to the edge and for those deployed to the cloud. The topologies are shown below.
+
+### Edge Topology
+
+<img src="diagrams/tosca_edge.png" style="width:95%" />
+
+### Cloud Topology
+
+<img src="diagrams/tosca_cloud.png" style="width:95%" />
+
+<div class="pagebreak"></div>
+
+### Discussion
+
+As apparent from the topology diagrams, I closely followed the previously introduced architecture of the E-Commerce platform. In order to represent every single component with the proper artifact type, I created custom node types for the following components:
+
+- AppEngine
+- CloudCDN
+- CloudDNS
+- CloudEdge
+- CloudMemorystore
+- CloudSQL
+- CloudStorage
+- GoogleCloudPlatform
+- KubernetesEngine
+- LocalDevice
+
+The relationships used to connect these components are:
+
+- `ConnectsTo`
+- `DependsOn`
+- `HostedOn`
+
+Please note that I also explicitly modeled modeled the container runtime of the Kubernetes Engine as a Docker Runtime, so that child components could be represented as containerized artifacts. While modeling a Kubernetes setup could have involved specifying pods, deployments, services, ingresses, etc., I decided to keep the model as simple as possible and abstract away all the k8s-specific details to preserve the scope of this assignment.
+
+It is important to mention that the OpenTosca diagrams involve various Google-Cloud-Platform-specific components, however, I specified open-source artifacts to be hosted on these vendor-specific components so that a reasonable level of cloud-portability is achieved. If we were to migrate the E-Commerce platform to another cloud provider, we would have to replace the Google Cloud Platform components with the corresponding components of the target cloud provider. In this case, most of the OpenTOSCA components would remain unchanged, since only the components that are specific to the previous cloud provider would have to be replaced.
+
+## Summary
+
+The proposed Cloud Architecture of an E-Commerce Platform is designed to utilize cloud techniques to provide a scalable, highly available, and low-latency platform for online sales. The system is built using cloud and AI technologies to ensure that it can handle a large number of concurrent users and withstand spikes in traffic, incorporating edge deployments too. This allows the platform to provide a smooth and seamless experience for both vendors and customers. The identification of both vendor agnostic and vendor specific patterns, I was able to explore the design space of the E-Commerce platform and identify suitable implementation approaches, providing a solid foundation for the development of the platform without being tied to a specific vendor.
+
+<div class="pagebreak"></div>
+
+## References
