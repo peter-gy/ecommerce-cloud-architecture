@@ -21,10 +21,12 @@ cloud Cloud {
     component "Review Management" as ReviewManagement
     component "Customer Management" as CustomerManagement
     component Customer
+    component Chat
 }
 cloud Edge {
     component "Transaction Management" as TransactionManagement 
     component "Order Management" as OrderManagement 
     component "Data Anonymization" as DataAnonymization
+    component "Fraud Detection" as FraudDetection
 }
 @enduml

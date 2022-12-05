@@ -4,7 +4,11 @@
 
 # Cloud Architecture of an E-Commerce Platform
 
-<div class="p-4 bg-gray-100 shadow-md rounded-md italic text-center">Submission of Péter Ferenc Gyarmati - <span class="font-bold">11913446</span></div>
+<div class="flex flex-col justify-center items-center space-y-2 p-4 bg-gray-100 shadow-md rounded-md">
+<div class="italic text-center">Submission of Péter Ferenc Gyarmati</div>
+<p class="italic text-sm">11913446</p>
+<a href="mailto:peter.ferenc.gyarmati@univie.ac.at">peter.ferenc.gyarmati@univie.ac.at</a>
+</div>
 
 ## Application Overview
 
@@ -184,7 +188,7 @@ Furthermore, for the system to support search with image recognition & object de
 
 As the previous diagram illustrates, the _E-Commerce Dashboard_ components are all deployed to the end-user client devices. In the case of a _Customer_, the _Local Analytics_ AI component is also deployed onto the device, featuring federated learning. The platform collects browsing and purchasing data from its users and divides the data into multiple local datasets, one for each user. The system then trains a machine learning model using the local datasets. Because the data is kept private and secure, the model is trained in a decentralized way and does not have access to the raw data and finally it uses the trained model to make personalized recommendations to users based on their browsing and purchasing history. As users continue to browse and make purchases on the platform, their local datasets are updated and the model is retrained using federated learning to improve its accuracy and relevance.
 
-The _Order Management_ and _Transaction Management_ components are deployed to edge nodes to provide absolutely mimimal latency and to ensure that the system is highly available in all areas. Furthermore, a _Data Anonymization_ component is also deployed here out of privacy considerations and so that the system is complient with all local data protection laws and gets fully anonymized before being sent to the cloud.
+The _Order Management_ and _Transaction Management_ components are deployed to edge nodes to provide absolutely mimimal latency and to ensure that the system is highly available in all areas. Furthermore, a _Data Anonymization_ component is also deployed here out of privacy considerations and so that the system is complient with all local data protection laws and gets fully anonymized before being sent to the cloud. Finally, a _Fraud Detection_ component is also deployed to the edge nodes to detect fraudulent activities in real-time.
 
 <div class="pagebreak"></div>
 
@@ -308,6 +312,8 @@ While the identification of cloud agnostic patterns is a crucial step when it co
 ## <span style="color: #ea4336;">G</span>oogle <span style="color: #fbbd05;">C</span>loud <span style="color: #4285f4">P</span>latform Architecture
 
 After having identified the patterns and artifacts that are required to build the E-Commerce platform, the next step is to define the architecture of the platform on GCP. The diagram below shows the architecture of the E-Commerce platform on Google Cloud Platform, adapted from the original logical architecture diagram.
+
+<img src="diagrams/gcp_arch.svg" style="width:100%" />
 
 <div class="pagebreak"></div>
 
