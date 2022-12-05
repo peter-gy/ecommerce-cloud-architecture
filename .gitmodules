@@ -1,0 +1,4 @@
+[submodule "opentosca-docker"]
+	path = opentosca/opentosca-docker
+	url = https://github.com/peter-gy/opentosca-docker.git
+	branch = main
