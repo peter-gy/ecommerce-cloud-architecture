@@ -9,7 +9,7 @@ async function main() {
         filePath: './index.md',
         config: {
             configPath: configPath,
-            previewTheme: 'github-light.css',
+            previewTheme: 'newsprint.css',
             // revealjsTheme: "white.css"
             codeBlockTheme: 'default.css',
             printBackground: true,

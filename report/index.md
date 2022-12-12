@@ -4,10 +4,23 @@
 
 # Cloud Architecture of an E-Commerce Platform
 
-<div class="flex flex-col justify-center items-center space-y-2 p-4 bg-gray-100 shadow-md rounded-md">
+<div class="flex flex-row justify-between items-center space-x-2 p-4 bg-gray-100 shadow-md rounded-md">
+
+<a class="flex flex-col justify-center items-center space-y-2" href="https://peter-gy.github.io/ecommerce-cloud-architecture">
+<p class="font-bold">Read Online</p>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+</a>
+
+<div class="flex flex-col justify-center items-center space-y-2">
 <div class="italic text-center">Submission of Péter Ferenc Gyarmati</div>
-<p class="italic text-sm">11913446</p>
 <a href="mailto:peter.ferenc.gyarmati@univie.ac.at">peter.ferenc.gyarmati@univie.ac.at</a>
+</div>
+
+<a class="flex flex-col justify-center items-center space-y-2" href="https://github.com/peter-gy/ecommerce-cloud-architecture" target="_blank">
+<p class="font-bold">See GitHub Repository</p>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+</a>
+
 </div>
 
 ## Application Overview
@@ -33,7 +46,7 @@ Selling products online is on the rise, however there is a significant entry-bar
 - The system should have extremely low latency to ensure a good user experience and the maximization of conversions
 - The system should be scalable to handle a large number of concurrent users
 - The system should tolerate spikes in traffic (e.g. before Holidays, Black Friday, etc.)
-- The system should be secure and protect customer and vendor data
+- The system should be secure and protect customer and vendor data, compliant with local and international laws
 - Data-loss should be prevented to maximize the satisfaction of customers and vendors
 
 <div class="pagebreak"></div>
@@ -182,7 +195,7 @@ The diagram below presents where the previously introduced components are planne
 
 Taking a look at the functional and non-functional requirements of the system, it is straightforward that the combined usage of cloud and edge deployment techniques is justified. A public cloud deployment is sensible for the system's core functionality to achieve high availability, scalability, fault tolerance, and elasticity.
 
-On the other hand, the usage of edge deployment to squeeze out the last millisecond of performance is justified by the nature of an e-commerce system and the behaviour of consumers: various studies - such as [the one conducted by Google and Deloitte jointly](https://www2.deloitte.com/ie/en/pages/consulting/articles/milliseconds-make-millions.html) - outline that _"milliseconds make millions"_, that is, the performance of an e-commerce system is crucial to maximize conversion rates and revenue. Furthermore, targeted advertisements and personalized recommendations also need to be supported by the system. This requires the collection and processing of users' data based on which massively personalized content can be delivered dynamically. Since this dynamic content can be influenced by users' location and how they interact with the frontend in real-time (what mouse or touch events they perform, how much time they spend on a given page segment, etc.) it is crucial to have this processing as close as possible to the users. Complying with local data privacy regulations is also a concern, which is another reason to have the data processing as close as possible to the users, without having to transfer the data to a far away, poetentially out-of-continent data center.
+On the other hand, the usage of edge deployment to squeeze out the last millisecond of performance is justified by the nature of an e-commerce system and the behaviour of consumers: various studies - such as [the one conducted by Google and Deloitte jointly](https://www2.deloitte.com/ie/en/pages/consulting/articles/milliseconds-make-millions.html) - outline that _"milliseconds make millions"_, that is, the performance of an e-commerce system is crucial to maximize conversion rates and revenue. Furthermore, targeted advertisements and personalized recommendations also need to be supported by the system. This requires the collection and processing of users' data based on which massively personalized content can be delivered dynamically. Since this dynamic content can be influenced by users' location and how they interact with the frontend in real-time (what mouse or touch events they perform, how much time they spend on a given page segment, etc.) it is crucial to have this processing as close as possible to the users. Complying with local data privacy regulations is also a concern, which is another reason to have the data processing as close as possible to the users, without having to transfer the data to a far away, potentially out-of-continent data center.
 
 Furthermore, for the system to support search with image recognition & object detection (so that users can search and browse products using images or descriptions) the use of AI is justified. What's more, for the fraudelent activity detection, the combined use of edge computing and AI is also reasonable, so that fraudulent activities such as fake accounts, fake reviews, or fraudulent transactions can be detected in real-time, helping to protect the system and its users from scams, and ensure the integrity and security of the platform.
 
@@ -317,7 +330,7 @@ After having identified the patterns and artifacts that are required to build th
 
 <div class="pagebreak"></div>
 
-## Modelling with <span class="inline capitalize">Open</span><span class="inline capitalize">Tosca</span>
+## Modelling with <span class="inline capitalize">Open</span><span class="inline capitalize">TOSCA</span>
 
 In order to keep the OpenTOSCA models as overviewable as possible, I created a separate topology for the components deployed to the edge and for those deployed to the cloud. The topologies are shown below.
 
@@ -352,7 +365,7 @@ The relationships used to connect these components are:
 - `DependsOn`
 - `HostedOn`
 
-Please note that I also explicitly modeled modeled the container runtime of the Kubernetes Engine as a Docker Runtime, so that child components could be represented as containerized artifacts. While modeling a Kubernetes setup could have involved specifying pods, deployments, services, ingresses, etc., I decided to keep the model as simple as possible and abstract away all the k8s-specific details to preserve the scope of this assignment.
+Please note that I also explicitly modeled the container runtime of the Kubernetes Engine as a Docker Runtime, so that child components could be represented as containerized artifacts. While modeling a Kubernetes setup could have involved specifying pods, deployments, services, ingresses, etc., I decided to keep the model as simple as possible and abstract away all the k8s-specific details to preserve the scope of this assignment.
 
 It is important to mention that the OpenTosca diagrams involve various Google-Cloud-Platform-specific components, however, I specified open-source artifacts to be hosted on these vendor-specific components so that a reasonable level of cloud-portability is achieved. If we were to migrate the E-Commerce platform to another cloud provider, we would have to replace the Google Cloud Platform components with the corresponding components of the target cloud provider. In this case, most of the OpenTOSCA components would remain unchanged, since only the components that are specific to the previous cloud provider would have to be replaced.
 
@@ -363,3 +376,11 @@ The proposed Cloud Architecture of an E-Commerce Platform is designed to utilize
 <div class="pagebreak"></div>
 
 ## References
+
+The below-listed resources were used to create this assignment, including technical documentation and graphical assets.
+
+- [Google Cloud Platform](https://cloud.google.com/)
+- [Google Cloud Platform Icons](https://cloud.google.com/icons)
+- [OpenTOSCA](https://www.opentosca.org/)
+- [DrawIO](https://www.draw.io/index.html)
+- [Cloud Computing Patterns](https://www.cloudcomputingpatterns.org/)
